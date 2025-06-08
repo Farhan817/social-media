@@ -1,7 +1,8 @@
-type EnpointKeys = "login"|"nonce";
+type EnpointKeys = "login"|"userCreate"|"posts";
 
 
 export const endpoints: Record<EnpointKeys, string> ={
     login:"/auth/verify",
-    nonce:"/auth/nonce"
+    userCreate:"/users",
+    posts:"/posts"
 }

@@ -1,25 +1,32 @@
 import { endpoints } from "../../../_utils/endpoints";
-import { get, post } from "../../../client/client";
-import { useState } from "react";
+import { post } from "../../../client/client";
 import { useAccount, useSignMessage } from "wagmi";
 import { LoginResponseType } from "../../../_utils/types";
+import { useRouter } from "next/navigation";
 
 const useLogin = () => {
+  const router = useRouter()
   const { address, isConnected } = useAccount();
   const { signMessageAsync } = useSignMessage();
-  const [jwt, setJwt] = useState("");
-
   const handleLogin = async () => {
-    get(endpoints.login,{address:address}).then(async (response: LoginResponseType) => {
-      console.log(response,"response")
-      const nonce = response.data.nonce;
-      const signature = await signMessageAsync({ message: nonce });
-      post(endpoints.login, { address, signature }).then((res) => {
-        setJwt(res.data.jwt);
-      }).catch(e=>console.log(e.message,"login"))
-    }).catch(e=>console.log(e.message,"main"))
+    if (!address) return;
+    try {
+      const message = `Login to Social App at ${new Date().toISOString()}`;
+      const signature = await signMessageAsync({ message });
+      const body = {
+        wallet_address: address,
+        message,
+        signature,
+      };
+      post(endpoints.login, body).then((res) => {
+        localStorage.setItem("user", res.data.token);
+        localStorage.setItem("wallet", address);
+        router.push("/")
+      });
+    } catch (e) {
+      console.log(e, "error");
+    }
   };
-
-  return [{ jwt,isConnected }, { handleLogin }];
+  return [{ isConnected }, { handleLogin }];
 };
 export default useLogin;
