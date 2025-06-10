@@ -28,4 +28,10 @@ export interface FeedState {
   posts: Post[];
   page: number;
   limit: number;
+  createModal:boolean
+}
+
+export interface postFormType{
+ 
+  content:string
 }

@@ -1,31 +1,22 @@
+
 "use client"
-import React from 'react'
-import useFeed from './hook/useFeed'
-import PostTile from '../ui/PostTile'
-import { Post } from '../../_utils/types'
+import { mockPosts } from "../../mockdata";
+import { ActionBar } from "../ui/ActionBar";
+import { PostCard } from "../ui/PostCard";
+import useFeed from "./hook/useFeed";
 
-const FeedPage = () => {
-   const [{posts},{handelPagination}]: [{ posts: Post[] }, { handelPagination: () => void }]= useFeed()
-    return (
-    <div className="min-h-screen bg-gray-100 py-6 px-4 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">Feed</h1>
-      <div className="space-y-4">
-        {posts?.map((post) => (
-          <PostTile key={post.id} post={post} />
-        ))}
+
+const FeedList = () => {
+  const[{ posts }, { handelPagination,handelCreatePost,handelLike }] = useFeed()
+return(
+  <div className="px-4">
+    {posts.map((post) => (
+      <div className="bg-white shadow-sm rounded-xl p-4 mb-4">
+      <PostCard key={post.id} post={post} />
+      <ActionBar commentCount={post.commentCount} likeCount={post.likeCount} handelLike={handelLike} post={post}  />
       </div>
-      
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => handelPagination()}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
-          >
-            Load More
-          </button>
-        </div>
-      
-    </div>
-  )
+    ))}
+  </div>
+);
 }
-
-export default FeedPage
+export default FeedList
