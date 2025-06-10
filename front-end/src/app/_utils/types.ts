@@ -28,7 +28,7 @@ export interface FeedState {
   posts: Post[];
   page: number;
   limit: number;
-  createModal:boolean
+  totalPage:number
 }
 
 export interface postFormType{
