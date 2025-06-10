@@ -24,7 +24,7 @@ This repository contains both the frontend and backend code for a full-stack web
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Farhan817/social-media.git
+git clone [https://github.com/Farhan817/social-media.git](https://github.com/Farhan817/social-media.git)
 cd social-media
 ```
 To read more how to run Front End and Back end please refer the Readme.me in side respective folders
