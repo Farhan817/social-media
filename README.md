@@ -8,12 +8,14 @@ This repository contains both the frontend and backend code for a full-stack web
 
 .
 ├── front-end/ # Next.js 15 application
+
 │ └── README.md
+
 ├── back-end/ # NestJS API server
+
 │ └── README.md
+
 └── README.md # Root instructions
-
-
 
 ---
 
