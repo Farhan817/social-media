@@ -6,11 +6,11 @@ import { Like } from './likes/entities/like.entity';
 
 export default new DataSource({
   type: 'postgres',
-  host: 'localhost',
+  host: process.env.DATABASE_HOST,
   port: 5432,
-  username: 'postgres',
-  password: 'root',
-  database: 'social_app',
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
   entities: ['dist/**/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
 });

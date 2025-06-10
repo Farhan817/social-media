@@ -15,7 +15,7 @@ const FeedList = () => {
         <div className="bg-white shadow-sm rounded-xl p-4 mb-4">
           <PostCard key={post.id} post={post} />
           <ActionBar
-            commentCount={post.commentCount}
+            commentCount={post.commentCount}  
             likeCount={post.likeCount}
             handelLike={handelLike}
             post={post}
